@@ -1,26 +1,24 @@
-""" Generic Dice Rolling Simulator 
-
-To Add:
-Set number of dice and sides per dice
-"""
+""" Generic Dice Rolling Simulator """
 
 import random, time, generic
 
 
-def rollDice():
-	print('ROLLING THE DICE NOW....')
-	time.sleep(2)
-	diceResults = [random.randrange(1,6) for i in range(0,2)]
-	print('YOU ROLLED : {0} {1}'.format(diceResults[0], diceResults[1]))
+def roll_results(dice_collection):
+	print('ROLLING DICE... ')
+	time.sleep(1)
+	for dice_number, dice_value in enumerate(dice_collection):
+		print(f'Dice {dice_number + 1} rolled {dice_value}')
 
-def play():
-	runGame = True
-	while runGame == True:
-		rollDice()
-		runGame = generic.run_again()
+def play(number_of_dice=2, number_of_sides=6):
+	dice_collection = [random.randrange(1, number_of_sides) for i in range(0, number_of_dice)]
+	roll_results(dice_collection)
 
 def main():
-	play()
+	run_game = True
+	while run_game == True:
+		play()
+		run_game = generic.run_again('Would you like to roll again? ', 'Exiting program. Good Bye.')
 
 if __name__ == '__main__':
 	main()
+
